@@ -1,0 +1,11 @@
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\obj\Debug\netcoreapp2.0\AspNetCoreNlog.csprojResolveAssemblyReference.cache
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\obj\Debug\netcoreapp2.0\AspNetCoreNlog.csproj.CoreCompileInputs.cache
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\obj\Debug\netcoreapp2.0\AspNetCoreNlog.AssemblyInfoInputs.cache
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\obj\Debug\netcoreapp2.0\AspNetCoreNlog.AssemblyInfo.cs
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\bin\Debug\netcoreapp2.0\AspNetCoreNlog.deps.json
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\bin\Debug\netcoreapp2.0\AspNetCoreNlog.runtimeconfig.json
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\bin\Debug\netcoreapp2.0\AspNetCoreNlog.runtimeconfig.dev.json
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\bin\Debug\netcoreapp2.0\AspNetCoreNlog.dll
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\bin\Debug\netcoreapp2.0\AspNetCoreNlog.pdb
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\obj\Debug\netcoreapp2.0\AspNetCoreNlog.dll
+C:\Users\user1\Desktop\AspNetCoreNlog-master\src\AspNetCoreNlog\obj\Debug\netcoreapp2.0\AspNetCoreNlog.pdb
