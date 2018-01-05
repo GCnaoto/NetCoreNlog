@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AspNetCoreNlog.Model;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreNlog.Controllers
 {
@@ -31,8 +33,8 @@ namespace AspNetCoreNlog.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-
-            return _context.Log.ToString();
+            _logger.LogError("getにてエラー発生");
+            return _context.Log.Where(x => x.id == id).SingleOrDefaultAsync().Result?.Message;
         }
 
         // POST api/values

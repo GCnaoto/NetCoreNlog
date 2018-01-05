@@ -5,10 +5,10 @@ namespace AspNetCoreNlog.Model
 {
     public partial class Log
     {
+        [Key]
         public int id { get; set; }
 
         private string _Application;
-        [Key]
         public string Application
         {
             get { return _Application; }
@@ -20,8 +20,8 @@ namespace AspNetCoreNlog.Model
             }
         }
 
-        private string _Logged;
-        public string Logged
+        private DateTime _Logged;
+        public DateTime Logged
         {
             get { return _Logged; }
             set

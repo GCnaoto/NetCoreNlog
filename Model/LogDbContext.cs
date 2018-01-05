@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace AspNetCoreNlog.Model
 {
@@ -6,7 +7,6 @@ namespace AspNetCoreNlog.Model
     {
 
         public LogDbContext(DbContextOptions<LogDbContext> options)
-            :base(options)
         {
             Database.EnsureCreated();
         }
@@ -22,7 +22,9 @@ namespace AspNetCoreNlog.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=logdb;");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=logdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            var loggerFactory = new LoggerFactory().AddConsole().AddDebug();
+            optionsBuilder.UseLoggerFactory(loggerFactory);
             //optionsBuilder.UseSqlite(@"Data Source='hello.db'");
         }
     }

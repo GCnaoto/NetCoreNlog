@@ -17,17 +17,21 @@ namespace AspNetCoreNlog
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        //public Startup(IHostingEnvironment env)
+        //{
+        //    var builder = new ConfigurationBuilder()
+        //        .SetBasePath(env.ContentRootPath)
+        //        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        //        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+        //        .AddEnvironmentVariables();
+        //    Configuration = builder.Build();
+        //}
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -47,8 +51,7 @@ namespace AspNetCoreNlog
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-		{
-			loggerFactory.AddNLog();
+        { 
 
             // Swaggerミドルウェアの登録
             app.UseSwagger();
@@ -57,6 +60,26 @@ namespace AspNetCoreNlog
             {
                 option.SwaggerEndpoint("/swagger/orders/swagger.json", "Order APIs sandbox.");
             });
+
+            env.ConfigureNLog("Nlog.config");
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
+
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
+            app.UseStaticFiles();
+            app.UseAuthentication();
+            loggerFactory.AddNLog();
+
+            LogManager.Configuration.Variables["ConnectionStrings"] = Configuration.GetConnectionString("NLogDb");
+            LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
 
             app.UseMvc();
 		}
