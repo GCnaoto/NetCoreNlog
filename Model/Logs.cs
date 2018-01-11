@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AspNetCoreNlog.Model
 {
-    public partial class Log
+    public partial class Logs
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         private string _Application;
         public string Application

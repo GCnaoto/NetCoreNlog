@@ -25,7 +25,6 @@ namespace AspNetCoreNlog.Controllers
         public IEnumerable<string> Get()
         {
             _logger.LogCritical("nlog is working from a controller");
-            // new ArgumentException("way wrong");
             return new string[] { "value1", "value2" };
         }
 
@@ -34,7 +33,7 @@ namespace AspNetCoreNlog.Controllers
         public string Get(int id)
         {
             _logger.LogError("getにてエラー発生");
-            return _context.Log.Where(x => x.id == id).SingleOrDefaultAsync().Result?.Message;
+            return _context.Logs.Where(x => x.Id == id).SingleOrDefaultAsync().Result?.Message;
         }
 
         // POST api/values

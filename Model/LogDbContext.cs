@@ -11,7 +11,7 @@ namespace AspNetCoreNlog.Model
             Database.EnsureCreated();
         }
 
-        public DbSet<Log> Log { get; set; }
+        public DbSet<Logs> Logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
