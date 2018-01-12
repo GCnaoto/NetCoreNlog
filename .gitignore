@@ -147,3 +147,4 @@ UpgradeLog*.htm
 UpgradeLog*.XML
 x64/
 x86/
+/Logs/internal-nlog.txt
