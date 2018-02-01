@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AspNetCoreNlog.Model
 {
@@ -25,25 +27,21 @@ namespace AspNetCoreNlog.Model
             base.OnModelCreating(modelBuilder);
 
         }
-        public override int SaveChanges()
+
+        public override Task<int> SaveChangesAsync()
         {
             ChangeTracker.DetectChanges();
             var serviceProvider = this.GetInfrastructure();
-            //var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
             //loggerFactory.AddProvider(new LoggerProvider(logAction));
-            _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("çXêVÇµÇƒÇ‹Ç∑");
+            _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("ÔøΩXÔøΩVÔøΩÔøΩÔøΩƒÇ‹ÇÔøΩ");
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added))
             {
-                _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("çXêVÇµÇƒÇ‹Ç∑");
+                _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("ÔøΩXÔøΩVÔøΩÔøΩÔøΩƒÇ‹ÇÔøΩ");
 
-                //modify entry.Entity here
             }
-
-            ChangeTracker.AutoDetectChangesEnabled = false;
-            var result = base.SaveChanges();
-            ChangeTracker.AutoDetectChangesEnabled = true;
-
-            return result;
+            
+            return await this.SaveChangesAsync();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

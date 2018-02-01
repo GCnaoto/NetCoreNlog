@@ -46,8 +46,6 @@ namespace AspNetCoreNlog
                 option.SwaggerEndpoint("/swagger/orders/swagger.json", "Order APIs sandbox.");
             });
 
-            // env.ConfigureNLog("Nlog.config");
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
