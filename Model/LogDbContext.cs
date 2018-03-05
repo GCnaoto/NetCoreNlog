@@ -26,14 +26,22 @@ namespace AspNetCoreNlog.Model
             base.OnModelCreating(modelBuilder);
 
         }
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+
+        public override Task<int> SaveChangesAsync()
         {
+            ChangeTracker.DetectChanges();
+            var serviceProvider = this.GetInfrastructure();
+            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            //loggerFactory.AddProvider(new LoggerProvider(logAction));
+            _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("ÔøΩXÔøΩVÔøΩÔøΩÔøΩƒÇ‹ÇÔøΩ");
+            foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added))
+            {
+                _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("ÔøΩXÔøΩVÔøΩÔøΩÔøΩƒÇ‹ÇÔøΩ");
 
-            _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("çXêVÇµÇƒÇ‹Ç∑");
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-
+            }
+            
+            return await this.SaveChangesAsync();
         }
-        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
