@@ -62,7 +62,7 @@ namespace AspNetCoreNlog
             app.UseStaticFiles();
             app.UseAuthentication();
             loggerFactory.AddNLog();
-
+            DbInitailizer.InitializeDatabase(app);
             LogManager.Configuration.Variables["ConnectionStrings"] = Configuration.GetConnectionString("NLogDb");
             
             app.UseMvc();
