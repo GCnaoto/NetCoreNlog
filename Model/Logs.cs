@@ -91,5 +91,18 @@ namespace AspNetCoreNlog.Model
                 _Exception = value;
             }
         }
+
+
+        private string _Kbn;
+        public string Kbn
+        {
+            get { return _Kbn; }
+            set
+            {
+                if (_Kbn == value)
+                    return;
+                _Kbn = value;
+            }
+        }
     }
 }

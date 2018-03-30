@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreNlog.Model;
+using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace AspNetCoreNlog.Controllers
 {
@@ -15,9 +17,12 @@ namespace AspNetCoreNlog.Controllers
     {
         private readonly LogDbContext _context;
 
-        public LogsController(LogDbContext context)
+        private readonly ILogger<LogsController> _logger;
+
+        public LogsController(LogDbContext context, ILogger<LogsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Logs
@@ -92,6 +97,25 @@ namespace AspNetCoreNlog.Controllers
 
             _context.Logs.Add(logs);
             await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetLogs", new { id = logs.Id }, logs);
+        }
+
+        // POST: api/Logs
+        [HttpPost("Kbn")]
+        public async Task<IActionResult> PostKbnLogs([FromBody] Logs logs)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            //logs.Kbn = "2";
+            _context.Logs.Add(logs);
+            //await _context.SaveChangesAsync();
+            var logger = LogManager.GetLogger(GetType().FullName);
+            LogEventInfo theEvent = new LogEventInfo(NLog.LogLevel.Debug, "", "Pass my custom value");
+            theEvent.Properties["kbn"] = "2";
+            logger.Log(theEvent);
 
             return CreatedAtAction("GetLogs", new { id = logs.Id }, logs);
         }

@@ -27,25 +27,25 @@ namespace AspNetCoreNlog.Model
 
         }
 
-        public override Task<int> SaveChangesAsync()
-        {
-            ChangeTracker.DetectChanges();
-            var serviceProvider = this.GetInfrastructure();
-            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-            //loggerFactory.AddProvider(new LoggerProvider(logAction));
-            _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("�X�V���Ă܂�");
-            foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added))
-            {
-                _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("�X�V���Ă܂�");
+        //public override Task<int> SaveChangesAsync()
+        //{
+            //ChangeTracker.DetectChanges();
+            //var serviceProvider = this.GetInfrastructure();
+            //var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            ////loggerFactory.AddProvider(new LoggerProvider(logAction));
+            //_loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("�X�V���Ă܂�");
+            //foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added))
+            //{
+            //    _loggerfact.AddDebug().CreateLogger<LogDbContext>().LogError("�X�V���Ă܂�");
 
-            }
+            //}
             
-            return await this.SaveChangesAsync();
-        }
+            //return await this.SaveChangesAsync();
+        //}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=logdb2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=logdb1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             _loggerfact = new LoggerFactory().AddConsole().AddDebug();
 
             optionsBuilder.UseLoggerFactory(_loggerfact);
